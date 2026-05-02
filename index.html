@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNAFU Records | Belfast Electronic Music Label</title>
+    <meta name="description" content="Snafu Records - Belfast-based electronic music label showcasing both commercial and underground sounds">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-magenta: #ff00ff;
+            --neon-yellow: #ffff00;
+            --deep-purple: #0a0015;
+            --dark-purple: #1a0033;
+            --mid-purple: #2d0050;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--deep-purple);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(255, 0, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridPulse 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Sound wave effect */
+        .sound-wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .wave-bar {
+            position: absolute;
+            bottom: 0;
+            width: 2%;
+            background: linear-gradient(to top, var(--neon-cyan), var(--neon-magenta));
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 20px; }
+            50% { height: 100px; }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan),
+                         0 0 40px var(--neon-cyan);
+            animation: logoGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { 
+                text-shadow: 0 0 20px var(--neon-cyan),
+                           0 0 40px var(--neon-cyan);
+            }
+            50% { 
+                text-shadow: 0 0 30px var(--neon-cyan),
+                           0 0 60px var(--neon-cyan),
+                           0 0 80px var(--neon-magenta);
+            }
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta), var(--neon-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroSlide 1s ease-out;
+            line-height: 1.1;
+        }
+
+        @keyframes heroSlide {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            animation: heroSlide 1s ease-out 0.2s both;
+            font-weight: 300;
+        }
+
+        .location {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50px;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            animation: heroSlide 1s ease-out 0.4s both;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Artists section */
+        .artists {
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--neon-magenta);
+            text-shadow: 0 0 20px var(--neon-magenta);
+        }
+
+        .artist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .artist-card {
+            background: linear-gradient(135deg, rgba(45, 0, 80, 0.4), rgba(26, 0, 51, 0.6));
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .artist-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-magenta), var(--neon-yellow));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .artist-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 0, 255, 0.4);
+        }
+
+        .artist-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+        }
+
+        .artist-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .artist-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .artist-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .artist-link:hover {
+            background: var(--neon-cyan);
+            color: var(--deep-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Services section */
+        .services {
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(26, 0, 51, 0.6), rgba(10, 0, 21, 0.8));
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-yellow);
+            box-shadow: 0 10px 40px rgba(255, 255, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-yellow);
+            letter-spacing: 2px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Social links */
+        .social-section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border: 2px solid var(--neon-magenta);
+            border-radius: 50px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--neon-magenta), var(--neon-cyan));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+            margin-top: 6rem;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                letter-spacing: 4px;
+            }
+            
+            .section-title {
+                letter-spacing: 2px;
+            }
+            
+            .artist-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* Glitch effect for emphasis */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .glitch {
+            animation: glitch 0.3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    
+    <div class="sound-wave" id="soundWave"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">SNAFU RECORDS</div>
+        </header>
+
+        <section class="hero">
+            <h1>SNAFU</h1>
+            <p class="tagline">Electronic Music Label</p>
+            <div class="location">BELFAST</div>
+        </section>
+
+        <section class="artists">
+            <h2 class="section-title">ARTISTS</h2>
+            <div class="artist-grid">
+                <div class="artist-card">
+                    <h3>CHRIS CONNOLLY</h3>
+                    <p>Trance • Techno • House</p>
+                    <div class="artist-links">
+                        <a href="https://open.spotify.com/artist/7rAcs18GoDPKXWqkLhlAG2" class="artist-link" target="_blank">Spotify</a>
+                        <a href="https://music.apple.com/gb/artist/chris-connolly" class="artist-link" target="_blank">Apple Music</a>
+                        <a href="https://soundcloud.com/chrisconnollymusic" class="artist-link" target="_blank">SoundCloud</a>
+                        <a href="https://chrisconnollyofficial.bandcamp.com" class="artist-link" target="_blank">Bandcamp</a>
+                        <a href="https://www.junodownload.com/search/?facet%5Bmirror_artist_facetm%5D%5B%5D=chris+connolly" class="artist-link" target="_blank">Juno</a>
+                    </div>
+                </div>
+
+                <div class="artist-card">
+                    <h3>TWINGLASS</h3>
+                    <p>Electronic • Experimental</p>
+                    <div class="artist-links">
+                        <a href="https://open.spotify.com/artist/5UQkuhuzjDvZXPFCrr6PrA" class="artist-link" target="_blank">Spotify</a>
+                        <a href="https://music.apple.com/gb/artist/twinglass/1842309781" class="artist-link" target="_blank">Apple Music</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <h2 class="section-title">SERVICES</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎵</div>
+                    <h3>DEMO SUBMISSION</h3>
+                    <p>Submit your tracks for consideration</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎚️</div>
+                    <h3>MASTERING</h3>
+                    <p>Professional audio mastering services</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎤</div>
+                    <h3>BOOKINGS</h3>
+                    <p>Artist bookings & management</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>TUITION</h3>
+                    <p>Trance music production lessons</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <h2 class="section-title">CONNECT</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/snafubelfast" class="social-link" target="_blank">Instagram</a>
+                <a href="https://www.tiktok.com/@snafubelfast" class="social-link" target="_blank">TikTok</a>
+                <a href="https://soundcloud.com/snafurecords" class="social-link" target="_blank">SoundCloud</a>
+                <a href="https://snafurecords.bandcamp.com" class="social-link" target="_blank">Bandcamp</a>
+                <a href="https://www.facebook.com/snafubelfast" class="social-link" target="_blank">Facebook</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 SNAFU RECORDS • BELFAST • ALL RIGHTS RESERVED</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create animated sound wave bars
+        const soundWave = document.getElementById('soundWave');
+        for (let i = 0; i < 50; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'wave-bar';
+            bar.style.left = `${i * 2}%`;
+            bar.style.animationDelay = `${i * 0.05}s`;
+            bar.style.animationDuration = `${1 + Math.random()}s`;
+            soundWave.appendChild(bar);
+        }
+
+        // Add scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'heroSlide 0.8s ease-out both';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.artist-card, .service-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Parallax effect for background grid
+        let scrollY = 0;
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+            document.querySelector('.background-grid').style.transform = `translateY(${scrollY * 0.3}px)`;
+        });
+    </script>
+</body>
+</html>
